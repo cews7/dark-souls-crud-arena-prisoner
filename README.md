@@ -1,2 +1,27 @@
-# dark-souls-crud-arena-prisoner
-crud practice, down to the studs
+## Dark Souls CRUD Arena
+The purpose of this exercise is to build out the same funcitonality using different approaches. CRUD operations should be performed for the following resources:
+
+- Hero
+- Equipment
+
+Equipment can be equipped by a hero and removed from a hero.
+
+
+### Approach: Prisoner 
+- FE: Vanilla JavaScript, HTML, CSS 
+- BE: Node.js, SQL, Postgres
+- Deployment: 
+	 - BE: Digital Ocean (running server, configuration required) 
+	 - FE: GitHub Pages
+
+**PRISONER VICTORY CONDITIONS**
+- Build complete UI with no framework assistance
+- Implement client-side form validation without libraries
+- Write raw SQL queries with proper error handling
+- Set up Node server from scratch with proper middleware
+- Configure and deploy BE to Digital Ocean with:
+    - Nginx  (server)
+    - SSL configuration
+    - Process management (PM2)
+    - Basic security hardening
+- Deploy FE to GitHub Pages
