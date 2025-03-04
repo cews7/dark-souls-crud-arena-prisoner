@@ -14,34 +14,49 @@
 
         <div class="mainContainer">
             <div class="cardContainer">
-                <div class="formContainer">
-                    <h2>Create New Hero</h2>
-                    <label for="heroName">Name
-                        <input type="text" id="heroName" placeholder="Hero Name">
+                <h2>Create New Hero</h2>
+                <form class="formContainer">
+                    <label for="heroName">
+                        Name
+                        <input type="text" 
+                                required 
+                                minlength="2" 
+                                maxlength="20" 
+                                id="heroName" 
+                                placeholder="Hero Name">
                     </label>
-                    <label for="heroLevel">Level
-                        <input type="number" id="heroLevel" placeholder="Hero Level">
+                    <label for="heroLevel">
+                        Level
+                        <input type="number" 
+                                required 
+                                min="1" 
+                                max="100" 
+                                id="heroLevel" 
+                                placeholder="Hero Level">
                     </label>
-                    <label for="heroClass">Class
-                        <select id="heroClass" placeholder="Hero Class">
-                        <option value="warrior">Warrior</option>
-                        <option value="mage">Mage</option>
-                        <option value="archer">Archer</option>
-                        <option value="paladin">Paladin</option>
-                        <option value="druid">Druid</option>
-                        <option value="hunter">Hunter</option>
-                        <option value="priest">Priest</option>
-                        <option value="warlock">Warlock</option>
+                    <label for="heroClass">
+                        Class
+                        <select required id="heroClass" placeholder="Hero Class">
+                            <option value="warrior">Warrior</option>
+                            <option value="mage">Mage</option>
+                            <option value="archer">Archer</option>
+                            <option value="paladin">Paladin</option>
+                            <option value="druid">Druid</option>
+                            <option value="hunter">Hunter</option>
+                            <option value="priest">Priest</option>
+                            <option value="warlock">Warlock</option>
                         </select>
-                        <br>
-                        <button id="createHero">Create Hero</button>
-                    </div>
-                </div>
+                    </label>
+                    <button type="submit" id="createHero">Create Hero</button>
+                </form>
             </div>
 
             <div class="cardContainer">
-                <h2>Hero Roster</h2>
-                <ul id="heroList"></ul>
+                <div class="heroListContainer">
+                    <h2>Hero Roster</h2>
+                    <ul id="heroList">
+                    </ul>
+                </div>
             </div>
         </div>
     </body>
@@ -50,6 +65,15 @@
 <style>
     .mainContainer {
         display: flex;
+        gap: 20px;
+    }
+
+    .cardContainer {
+        flex: 1;
+        margin: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
     }
 
     .titleContainer {
@@ -62,13 +86,7 @@
         flex-direction: column;
         justify-content: left;
         align-items: left;
-    }
-
-    .heroForm {
-        text-align: left;
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
+        gap: 10px;
     }
 
 </style>

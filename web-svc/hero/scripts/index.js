@@ -1,3 +1,4 @@
-import { createHeroButton } from './create.js';
+import { handleCreateHeroButton } from './create.js';
+import { getHeroes } from './read.js';
 
-export { createHeroButton };
+export { handleCreateHeroButton, getHeroes };

@@ -1,3 +1,4 @@
-import { createHeroButton } from './hero/scripts/index.js';
+import { handleCreateHeroButton, getHeroes } from './hero/scripts/index.js';
 
-createHeroButton();
+handleCreateHeroButton();
+getHeroes();
