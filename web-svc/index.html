@@ -1,11 +1,74 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="module" src="index.js"></script>
-</head>
-<body>
-    <h1>Dark Souls CRUD Arena: Prisoner</h1>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script type="module" src="index.js"></script>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="titleContainer">
+            <h1>ASHEN ONES</h1>
+            <h3>Create thy champion and face the darkness</h3>
+        </div>
+
+        <div class="mainContainer">
+            <div class="cardContainer">
+                <div class="formContainer">
+                    <h2>Create New Hero</h2>
+                    <label for="heroName">Name
+                        <input type="text" id="heroName" placeholder="Hero Name">
+                    </label>
+                    <label for="heroLevel">Level
+                        <input type="number" id="heroLevel" placeholder="Hero Level">
+                    </label>
+                    <label for="heroClass">Class
+                        <select id="heroClass" placeholder="Hero Class">
+                        <option value="warrior">Warrior</option>
+                        <option value="mage">Mage</option>
+                        <option value="archer">Archer</option>
+                        <option value="paladin">Paladin</option>
+                        <option value="druid">Druid</option>
+                        <option value="hunter">Hunter</option>
+                        <option value="priest">Priest</option>
+                        <option value="warlock">Warlock</option>
+                        </select>
+                        <br>
+                        <button id="createHero">Create Hero</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cardContainer">
+                <h2>Hero Roster</h2>
+                <ul id="heroList"></ul>
+            </div>
+        </div>
+    </body>
 </html>
+
+<style>
+    .mainContainer {
+        display: flex;
+    }
+
+    .titleContainer {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .formContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: left;
+        align-items: left;
+    }
+
+    .heroForm {
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+</style>

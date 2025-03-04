@@ -1,3 +1,3 @@
-import { hero } from './hero/scripts/index.js';
+import { createHeroButton } from './hero/scripts/index.js';
 
-console.log(hero);
+createHeroButton();
