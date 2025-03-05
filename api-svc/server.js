@@ -123,10 +123,8 @@ const getHeroes = async (req, res) => {
 }
 
 const createHero = async (body, res) => {
-    if (body.name === undefined 
-        || body.level === undefined 
-        || body.class === undefined
-    ) {
+    if (body.name === '' || body.level === '' || body.class === '') {
+        console.log('Missing required fields');
         res.statusCode = 400;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ error: 'Missing required fields' }));
@@ -162,7 +160,7 @@ const createHero = async (body, res) => {
 }
 
 const updateHero = async (body, res) => {
-    if (body.name === undefined || body.level === undefined || body.class === undefined) {
+    if (body.name === '' || body.level === '' || body.class === '') {
         res.statusCode = 400;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ error: 'Missing required fields' }));

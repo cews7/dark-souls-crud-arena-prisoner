@@ -1,6 +1,8 @@
+import { getHeroes } from './read.js';
+
 const handleCreateHeroButton = () => {
     const button = document.getElementById('createHero');
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', async (e) => {
         e.preventDefault();
         const heroName = document.getElementById('heroName').value;
         const heroLevel = document.getElementById('heroLevel').value;
@@ -9,20 +11,21 @@ const handleCreateHeroButton = () => {
             name: heroName,
             level: heroLevel,
             class: heroClass
-        }
-        fetch('http://localhost:3000/api/heroes', {
-            method: 'POST',
-            body: JSON.stringify(hero),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => 
-            response.json()
-        )
-        .catch(error => {
+        } 
+        try {
+            const response = await fetch('http://localhost:3000/api/heroes', {
+                method: 'POST',
+                body: JSON.stringify(hero),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            await response.json();
+            document.getElementById('createHeroForm').reset();
+            getHeroes();
+        } catch (error) {
             console.error('Error:', error);
-        })
+        }
     })
 }
 
