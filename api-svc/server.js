@@ -45,10 +45,10 @@ const handleApiRequest = (req, res) => {
 const serveFile = async (req, res) => {
     // Map URL path to file system path
     let filePath;
-    if (req.url === '/') {
-        filePath = path.join(webDirectory, 'index.html');
-    } else if (req.url.match(/^\/heroes\/\d+$/)) {
+    if (req.url.match(/^\/heroes\/\d+$/)) {
         filePath = path.join(webDirectory, 'hero/views/show.html');
+    } else if (req.url === '/') {
+        filePath = path.join(webDirectory, 'index.html');
     } else {
         filePath = path.join(webDirectory, req.url);
     }
