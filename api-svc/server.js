@@ -44,11 +44,17 @@ const handleApiRequest = (req, res) => {
 
 const serveFile = async (req, res) => {
     // Map URL path to file system path
-    let filePath = path.join(webDirectory, req.url === '/' ? 'index.html' : req.url);
+    let filePath;
+    if (req.url === '/') {
+        filePath = path.join(webDirectory, 'index.html');
+    } else if (req.url.match(/^\/heroes\/\d+$/)) {
+        filePath = path.join(webDirectory, 'hero/views/show.html');
+    } else {
+        filePath = path.join(webDirectory, req.url);
+    }
     
     try {
         const data = await fs.readFile(filePath);
-        
         // Determine content type based on file extension
         const ext = path.extname(filePath).toLowerCase();
         const contentType = {

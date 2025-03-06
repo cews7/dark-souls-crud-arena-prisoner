@@ -5,6 +5,7 @@
         <title>Document</title>
         <script type="module" src="index.js"></script>
         <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="hero/hero.css">
     </head>
     <body>
         <div class="titleContainer">
@@ -19,6 +20,7 @@
                     <label for="heroName">
                         Name
                         <input type="text" 
+                                class="formInput"
                                 required 
                                 minlength="2" 
                                 maxlength="20" 
@@ -28,6 +30,7 @@
                     <label for="heroLevel">
                         Level
                         <input type="number" 
+                                class="formInput"
                                 required 
                                 min="1" 
                                 max="100" 
@@ -36,7 +39,10 @@
                     </label>
                     <label for="heroClass">
                         Class
-                        <select required id="heroClass" placeholder="Hero Class">
+                        <select required 
+                                class="formInput"
+                                id="heroClass" 
+                                placeholder="Hero Class">
                             <option value="warrior">Warrior</option>
                             <option value="mage">Mage</option>
                             <option value="archer">Archer</option>
@@ -86,7 +92,18 @@
         flex-direction: column;
         justify-content: left;
         align-items: left;
+        width: 100%;
         gap: 10px;
+    }
+
+    .formInput {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        font-family: 'Arial', sans-serif;
+        color: #333;
     }
 
 </style>
