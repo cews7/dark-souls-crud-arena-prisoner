@@ -1,4 +1,4 @@
-import { getHeroes } from './read.js';
+import { getHeroes } from './show-all.js';
 
 const handleCreateHeroButton = () => {
     const button = document.getElementById('createHero');

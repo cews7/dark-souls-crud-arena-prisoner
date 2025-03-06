@@ -1,5 +1,18 @@
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #d2b48c;
+    --text-color: #212529;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Cardo', serif;
+}
+
 button {
-    background-color:rgb(2, 23, 3); /* Green */
+    background-color:rgb(2, 23, 3);
     border: none;
     color: white;
     padding: 8px 16px;
@@ -7,7 +20,19 @@ button {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+    font-family: 'Cardo', serif;
     margin: 4px 2px;
     cursor: pointer;
-    width: 100%;
+    width: 200px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+button:hover {
+   transform: scale(1.05);
+   transition: all 0.3s ease;
 }

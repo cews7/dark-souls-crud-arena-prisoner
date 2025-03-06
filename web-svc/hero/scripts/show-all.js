@@ -2,15 +2,17 @@ const getHeroes = async () => {
     try {
         const response = await fetch('http://localhost:3000/api/heroes');
         const data = await response.json();
+        localStorage.setItem('heroes', JSON.stringify(data));
         const heroList = document.getElementById('heroList');
         heroList.innerHTML = '';
         data.forEach(hero => {
             const heroItem = document.createElement('div');
             heroItem.classList.add('heroItem');
-            heroItem.innerHTML = `<h4>${hero.name}</h4> <p>Level: ${hero.level}</p> <p>Class: ${hero.class}</p>`;
+            heroItem.innerHTML = `<h4>${hero.name}</h4> <p>Level: ${hero.level}</p> <p>${hero.class}</p>`;
 
             heroItem.addEventListener('click', () => {
-                window.location.href = `http://localhost:3000/heroes/${hero.id}`;
+                localStorage.setItem('selectedHero', JSON.stringify(hero));
+                window.location.href = `/heroes/${hero.id}`;
             });
             heroList.appendChild(heroItem);
         });

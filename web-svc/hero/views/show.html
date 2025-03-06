@@ -1,16 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <link rel="stylesheet" href="hero/hero.css">
-    <script type="module" src="hero/scripts/show.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hero Details</title>
+    <script type="module" src="/hero/scripts/show.js"></script>
+    <link rel="stylesheet" href="/hero/hero.css">
+    <link rel="stylesheet" href="/hero/hero-classes.css">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
-<div class="heroContainer">
-    <h1>Hero</h1>
-    <div class="heroInfo">
-        hero info
+<body>
+    <button id="backButton" class="backButton" onclick="window.location.href='/'">&larr; Back</button>
+    <div class="heroContainer">
+        <div class="heroDetailsContainer">
+            <h1 id="heroName" class="heroName"></h1>
+            <h2>Hero Details</h2>
+            <div id="heroDetails"></div>
+            <div id="heroFlavorText"></div>
+        </div>
     </div>
-    <div class="heroStats">
-        hero stats
-    </div>
-    <div class="heroInventory">
-        hero inventory
-    </div>
-</div>
+</body>
+</html>
+
+<style>
+    .heroName {
+        font-size: 5rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .heroContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .heroDetailsContainer {
+        border: 5px solid #ccc;
+        border-radius: 5px;
+        padding: 40px;
+    }
+</style>

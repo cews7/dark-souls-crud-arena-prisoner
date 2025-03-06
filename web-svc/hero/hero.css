@@ -26,3 +26,32 @@
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     transform: translateY(-2px);
 }
+
+.heroName {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.heroLevel {
+    font-size: 18px;
+    color: #666;
+}
+
+.heroClass {
+    font-size: 18px;
+    color: #666;
+}
+
+.backButton {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    width: 100px;
+    height: 40px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}

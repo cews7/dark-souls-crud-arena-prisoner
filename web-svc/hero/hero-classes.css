@@ -1,0 +1,42 @@
+.paladin-class {
+    color: #ffa500;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.warrior-class {
+    color:rgb(136, 20, 0);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.druid-class {
+    color: #008000;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.hunter-class {
+    color:rgb(2, 76, 1);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.priest-class {
+    color:rgb(195, 231, 231);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.warlock-class {
+    color:rgb(108, 4, 108);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.mage-class {
+    color: #0000ff;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
