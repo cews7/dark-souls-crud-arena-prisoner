@@ -1,6 +1,6 @@
 import { getHeroes } from './show-all.js';
 
-const handleCreateHeroButton = () => {
+export const handleCreateHeroButton = () => {
     const button = document.getElementById('createHero');
     button.addEventListener('click', async (e) => {
         e.preventDefault();
@@ -29,4 +29,3 @@ const handleCreateHeroButton = () => {
     })
 }
 
-export { handleCreateHeroButton };

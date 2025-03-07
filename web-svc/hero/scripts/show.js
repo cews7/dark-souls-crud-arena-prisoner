@@ -29,7 +29,7 @@ const heroClassMap = {
     },
 }
 
-const showHero = () => {
+export const showHero = () => {
     const hero = JSON.parse(localStorage.getItem('selectedHero'));
     const heroDetails = document.getElementById('heroDetails');
     const heroName = document.getElementById('heroName');
@@ -54,9 +54,15 @@ const showHero = () => {
 
 };
 
+export const handleUpdateHeroButton = () => {
+    const updateHeroButton = document.getElementById('updateHeroButton');
+    updateHeroButton.addEventListener('click', () => {
+        console.log('update hero button clicked');
+    });
+}
 // Wait for DOM then execute
 document.addEventListener('DOMContentLoaded', () => {
     showHero();
+    handleUpdateHeroButton();
 });
 
-export { showHero };
