@@ -35,7 +35,7 @@ const getHero = async () => {
     return data;
 }
 
-export const handleUpdateHeroSubmit = () => {
+export const handleUpdateHeroButton = () => {
     const updateHeroForm = document.getElementById('updateHeroForm');
     const updateHeroSubmit = document.getElementById('updateHeroSubmit');
     if (!updateHeroForm || !updateHeroSubmit) return;
@@ -91,5 +91,5 @@ export const handleUpdateHeroSubmit = () => {
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
-    handleUpdateHeroSubmit();
+    handleUpdateHeroButton();
 });

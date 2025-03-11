@@ -1,11 +1,11 @@
 import { handleCreateHeroButton } from './create.js';
-import { handleUpdateHeroSubmit } from './update.js';
+import { handleUpdateHeroButton } from './update.js';
 import { getHeroes } from './show-all.js';
 import { showHero } from './show.js';
 
 const initHero = () => {
     handleCreateHeroButton();
-    handleUpdateHeroSubmit();
+    handleUpdateHeroButton();
     getHeroes();
     showHero();
 }
