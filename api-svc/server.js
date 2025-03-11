@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { validateHeroBody, validateEquipmentBody, parseJsonBody } from './utils.js';
+
 import { createServer } from 'node:http';
 import fs from 'node:fs/promises';
 import path from 'node:path';
@@ -34,7 +36,7 @@ const handleApiRequest = (req, res) => {
     if (apiPath.startsWith('/heroes')) {
         handleHeroesRequest(req, res);
     } else if (apiPath === '/equipment') {
-        // Handle equipment endpoint
+        handleEquipmentRequest(req, res);
     } else {
         res.statusCode = 404;
         res.setHeader('Content-Type', 'application/json');
@@ -80,6 +82,64 @@ const serveFile = async (req, res) => {
             res.statusCode = 500;
             res.end('Server error');
         }
+    }
+}
+
+const handleEquipmentRequest = async (req, res) => {
+    if (req.method === 'GET') {
+        getAllEquipment(req, res);
+    } else if (req.method === 'POST') {
+        const body = await parseJsonBody(req);
+        createEquipment(body, res);
+    }
+}
+
+const getAllEquipment = async (req, res) => {
+    try {
+        const result = await pool.query('SELECT * FROM equipment');
+        res.end(JSON.stringify(result.rows));
+    } catch (err) {
+        console.error('Database error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Error getting equipment' }));
+    }
+}
+
+const createEquipment = async (body, res) => {
+    if (body.name === '' || body.type === '' || body.minLevel === '') {
+        console.log('Missing required fields');
+        res.statusCode = 400;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Missing required fields' }));
+        return;
+    }
+
+    if (!validateEquipmentBody(body)) {
+        res.statusCode = 400;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Invalid equipment data' }));
+        return;
+    }
+
+    try {
+        const result = await pool.query(
+            'INSERT INTO equipment (name, type, minLevel) VALUES ($1, $2, $3) RETURNING *', 
+            [body.name, body.type, body.minLevel]
+        );
+        
+        if (result.rowCount === 1) {
+            res.statusCode = 201;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(result.rows[0]));
+        } else {
+            throw new Error('Failed to create equipment');
+        }
+    } catch (err) {
+        console.error('Database error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Error creating equipment' }));
     }
 }
 
@@ -129,7 +189,6 @@ const getHero = async (req, res) => {
     const id = req.url.split('/').pop();
     try {
         const result = await pool.query('SELECT * FROM heroes WHERE id = $1', [id]);
-        console.log(result.rows[0]);
         res.end(JSON.stringify(result.rows[0]));
     } catch (err) {
         console.error('Database error:', err);
@@ -211,47 +270,3 @@ const updateHero = async (body, res) => {
     }
 }
 
-const validateHeroBody = (body) => {
-    const allowedFields = ['name', 'level', 'class', 'id'];
-    for (const [key, value] of Object.entries(body)) {
-        if (!allowedFields.includes(key)) {
-            return false;
-        }
-        if (key === 'id' && typeof value !== 'number') {
-            return false;
-        }
-        if (key === 'level' && typeof value !== 'number') {
-            return false;
-        }
-        if (key === 'name' && typeof value !== 'string') {
-            return false;
-        }
-        if (key === 'class' && typeof value !== 'string') {
-            return false;
-        }
-    }
-    return true;
-}
-
-const parseJsonBody = async (req) => {
-  return new Promise((resolve, reject) => {
-    let body = '';
-    
-    req.on('data', (chunk) => {
-      body += chunk.toString();
-    });
-    
-    req.on('end', () => {
-      try {
-        const parsedBody = body ? JSON.parse(body) : {};
-        resolve(parsedBody);
-      } catch (error) {
-        reject(error);
-      }
-    });
-    
-    req.on('error', (error) => {
-      reject(error);
-    });
-  });
-}
