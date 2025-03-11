@@ -1,5 +1,5 @@
 import pool from '../database.js';
-import { validateHeroBody, validateEquipmentBody, parseJsonBody } from '../utils.js';
+import { validateHeroBody, parseJsonBody } from '../utils.js';
 
 export const handleHeroesRequest = async (req, res) => {
     if (req.method === 'GET') {
