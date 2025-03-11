@@ -60,6 +60,42 @@
             </div>
 
             <div class="cardContainer">
+                <h2>Create New Equipment</h2>
+                <form class="formContainer" id="createEquipmentForm">
+                    <label for="equipmentName">
+                        Name
+                        <input type="text" 
+                                class="formInput"
+                                required 
+                                minlength="2" 
+                                maxlength="200" 
+                                id="equipmentName" 
+                                placeholder="Equipment Name">
+                    </label>
+                    <label for="equipmentType">
+                        Type
+                        <select required 
+                                class="formInput"
+                                id="equipmentType" 
+                                placeholder="Equipment Type">
+                            <option value="weapon">Weapon</option>
+                            <option value="armor">Armor</option>
+                        </select>
+                    </label>
+                    <label for="equipmentMinLevel">
+                        Min Level
+                        <input type="number" 
+                                class="formInput"
+                                required 
+                                min="1" 
+                                max="100" 
+                                id="equipmentMinLevel" 
+                                placeholder="Equipment Min Level">
+                    </label>
+                    <button type="submit" id="createEquipmentSubmit">Create Equipment</button>
+                </form>
+            </div>
+            <div class="cardContainer">
                 <div class="heroListContainer">
                     <h2>Hero Roster</h2>
                     <ul id="heroList">
