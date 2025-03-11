@@ -1,15 +1,19 @@
 import { getHeroes } from './show-all.js';
 
 export const handleCreateHeroButton = () => {
-    const button = document.getElementById('createHero');
-    button.addEventListener('click', async (e) => {
+    const submitButton = document.getElementById('createHeroSubmit');
+    submitButton.addEventListener('click', async (e) => {
         e.preventDefault();
         const heroName = document.getElementById('heroName').value;
         const heroLevel = document.getElementById('heroLevel').value;
         const heroClass = document.getElementById('heroClass').value;
+        if (!heroName || !heroLevel || !heroClass) {
+            alert('Please fill in all fields');
+            return;
+        }
         const hero = {
             name: heroName,
-            level: heroLevel,
+            level: parseInt(heroLevel),
             class: heroClass
         } 
         try {

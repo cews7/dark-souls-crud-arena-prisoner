@@ -31,7 +31,7 @@ const handleApiRequest = (req, res) => {
     // Parse the API path (remove the /api prefix)
     const apiPath = req.url.substring(4); // Remove '/api'
     // Handle different API endpoints
-    if (apiPath === '/heroes') {
+    if (apiPath.startsWith('/heroes')) {
         handleHeroesRequest(req, res);
     } else if (apiPath === '/equipment') {
         // Handle equipment endpoint
@@ -85,13 +85,10 @@ const serveFile = async (req, res) => {
 
 const handleHeroesRequest = async (req, res) => {
     if (req.method === 'GET') {
-        try {
+        if (req.url.match(/api\/heroes\/\d+$/)) {
+            getHero(req, res);
+        } else {
             getHeroes(req, res);
-        } catch (err) {
-            console.error('Error:', err);
-            res.statusCode = 500;
-            res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ error: 'Error getting heroes' }));
         }
     } else if (req.method === 'POST') {
         try {
@@ -125,6 +122,20 @@ const getHeroes = async (req, res) => {
         res.statusCode = 500;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ error: 'Error getting heroes' }));
+    }
+}
+
+const getHero = async (req, res) => {
+    const id = req.url.split('/').pop();
+    try {
+        const result = await pool.query('SELECT * FROM heroes WHERE id = $1', [id]);
+        console.log(result.rows[0]);
+        res.end(JSON.stringify(result.rows[0]));
+    } catch (err) {
+        console.error('Database error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Error getting hero' }));
     }
 }
 
@@ -182,10 +193,9 @@ const updateHero = async (body, res) => {
 
     try {
         const result = await pool.query(
-            'UPDATE heroes SET name = $1, level = $2, class = $3 WHERE name = $4 RETURNING *',
-            [body.name, body.level, body.class, body.name]
+            'UPDATE heroes SET name = $1, level = $2, class = $3 WHERE id = $4 RETURNING *',
+            [body.name, body.level, body.class, body.id]
         );
-
         if (result.rowCount) {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
@@ -202,9 +212,21 @@ const updateHero = async (body, res) => {
 }
 
 const validateHeroBody = (body) => {
-    const allowedFields = ['name', 'level', 'class'];
+    const allowedFields = ['name', 'level', 'class', 'id'];
     for (const [key, value] of Object.entries(body)) {
         if (!allowedFields.includes(key)) {
+            return false;
+        }
+        if (key === 'id' && typeof value !== 'number') {
+            return false;
+        }
+        if (key === 'level' && typeof value !== 'number') {
+            return false;
+        }
+        if (key === 'name' && typeof value !== 'string') {
+            return false;
+        }
+        if (key === 'class' && typeof value !== 'string') {
             return false;
         }
     }

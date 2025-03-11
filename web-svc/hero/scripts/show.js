@@ -32,14 +32,15 @@ const heroClassMap = {
 export const showHero = () => {
     const hero = JSON.parse(localStorage.getItem('selectedHero'));
     const heroDetails = document.getElementById('heroDetails');
-    const heroName = document.getElementById('heroName');
+    const heroNameTitle = document.getElementById('heroNameTitle');
+    if (!heroDetails || !heroNameTitle) return;
 
     const classInfo = heroClassMap[hero.class] || {
         cssClass: 'unknown-class',
         flavorText: 'a mysterious figure',
     };
 
-    heroName.innerHTML = hero.name;
+    heroNameTitle.innerHTML = hero.name;
     heroDetails.innerHTML = `
         <p class="heroLevel">Level: ${hero.level}</p>
         <div class="heroClassContainer">
@@ -52,17 +53,46 @@ export const showHero = () => {
         flavorText.innerHTML = `<p>${classInfo.flavorText}</p>`;
     }
 
+    const updateHeroForm = document.getElementById('updateHeroForm');
+    if (updateHeroForm) {
+        updateHeroForm.style.display = 'none';
+    }
+
 };
 
 export const handleUpdateHeroButton = () => {
     const updateHeroButton = document.getElementById('updateHeroButton');
+    if (!updateHeroButton) return;
+    
     updateHeroButton.addEventListener('click', () => {
-        console.log('update hero button clicked');
+        const updateHeroForm = document.getElementById('updateHeroForm');
+        updateHeroForm.style.display = 'block';
+        
+        const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
+        const heroName = document.getElementById('heroName');
+        const heroLevel = document.getElementById('heroLevel');
+        const heroClass = document.getElementById('heroClass');
+
+        heroName.value = selectedHero.name;
+        heroLevel.value = selectedHero.level;
+        heroClass.value = selectedHero.class;
     });
 }
-// Wait for DOM then execute
+
+export const handleCancelUpdateHeroButton = () => {
+    const cancelUpdateHeroButton = document.getElementById('cancelUpdateHeroButton');
+    if (!cancelUpdateHeroButton) return;
+
+    cancelUpdateHeroButton.addEventListener('click', () => {
+        const updateHeroForm = document.getElementById('updateHeroForm');
+        console.log('cancelUpdateHeroButton');
+        updateHeroForm.reset();
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     showHero();
     handleUpdateHeroButton();
+    handleCancelUpdateHeroButton();
 });
 
