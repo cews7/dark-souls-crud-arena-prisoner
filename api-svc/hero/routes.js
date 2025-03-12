@@ -33,7 +33,7 @@ export const handleHeroesRequest = async (req, res) => {
 
 const getHeroes = async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM heroes');
+        const result = await pool.query('SELECT * FROM heroes ORDER BY id ASC');
         res.end(JSON.stringify(result.rows));
     } catch (err) {
         console.error('Database error:', err);
