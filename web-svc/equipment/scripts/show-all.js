@@ -8,7 +8,10 @@ const getAllEquipment = async () => {
         data.forEach(equipment => {
             const equipmentItem = document.createElement('div');
             equipmentItem.classList.add('equipmentItem');
-            equipmentItem.innerHTML = `<h4>${equipment.name}</h4> <p>Type: ${equipment.type}</p> <p>Min Level: ${equipment.minLevel}</p>`;
+            equipmentItem.innerHTML = `<h4>${equipment.name}</h4> <p>Type: ${equipment.type}</p> <p>Min Level: ${equipment.minLevel}</p>
+            <p>Status: ${equipment.hero_id ? 'Equipped' : 'Available'}</p>
+            `
+            ;
 
             equipmentItem.addEventListener('click', () => {
                 localStorage.setItem('selectedEquipment', JSON.stringify(equipment));

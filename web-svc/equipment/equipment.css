@@ -1,0 +1,56 @@
+/* Equipment list container */
+#equipmentList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual equipment item */
+.equipmentItem {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+/* Hover effect */
+.equipmentItem:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-color: #999;
+}
+
+/* Equipment name */
+.equipmentItem h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 18px;
+}
+
+/* Equipment details */
+.equipmentItem p {
+    margin: 5px 0;
+    color: #666;
+}
+
+/* Available status */
+.equipmentItem p:last-child {
+    margin-top: auto;
+    font-weight: bold;
+}
+
+/* Different colors based on equipment status */
+.equipmentItem p:last-child:contains('Available') {
+    color: #28a745;
+}
+
+.equipmentItem p:last-child:contains('Equipped') {
+    color: #dc3545;
+}

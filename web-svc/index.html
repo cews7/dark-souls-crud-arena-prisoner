@@ -6,6 +6,7 @@
         <script type="module" src="index.js"></script>
         <link rel="stylesheet" href="main.css">
         <link rel="stylesheet" href="hero/hero.css">
+        <link rel="stylesheet" href="equipment/equipment.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -15,10 +16,10 @@
             <h1>ASHEN ONES</h1>
             <h3>Create thy champion and face the darkness</h3>
         </div>
-
-        <div class="topContainer">
-            <div class="cardContainer">
-                <h2>Create New Hero</h2>
+        <div class="mainContainer">
+            <div class="topContainer">
+                <div class="cardContainer">
+                    <h2>Create New Hero</h2>
                 <form class="formContainer" id="createHeroForm">
                     <label for="heroName">
                         Name
@@ -96,72 +97,15 @@
                 </form>
             </div>
             <div class="cardContainer">
-                <div class="heroListContainer">
-                    <h2>Hero Roster</h2>
-                    <ul id="heroList">
-                    </ul>
-                </div>
+                <h2>Hero Roster</h2>
+                <ul id="heroList"></ul>
             </div>
-        </div>
-        <div class="bottomContainer">
-            <div class="equipmentListContainer">
-                <h2>Equipment List</h2>
-                <ul id="equipmentList">
-                </ul>
+            <div class="bottomContainer">
+                <div class="cardContainer">
+                    <h2>Equipment List</h2>
+                    <ul id="equipmentList"></ul>
+                </div>
             </div>
         </div>
     </body>
 </html>
-
-<style>
-    .topContainer {
-        display: flex;
-        gap: 20px;
-    }
-
-    .cardContainer {
-        flex: 1;
-        margin: 20px;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .titleContainer {
-        text-align: center;
-        margin-top: 40px;
-    }
-
-    .formContainer {
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: left;
-        width: 100%;
-        gap: 10px;
-    }
-
-    .formInput {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-        font-family: 'Arial', sans-serif;
-        color: #333;
-    }
-
-    .bottomContainer {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .equipmentListContainer {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-    }
-    
-
-</style>

@@ -1,18 +1,21 @@
 :root {
-    --primary-color: #007bff;
     --secondary-color: #6c757d;
     --background-color: #d2b48c;
+    --title-banner-color: #6c757d;
     --text-color: #212529;
+    --button-color: #cd6318;
 }
 
 body {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Cardo', serif;
+    margin: 0;
+    padding: 0;
 }
 
 button {
-    background-color:rgb(2, 23, 3);
+    background-color: var(--button-color);
     border: none;
     color: white;
     padding: 8px 16px;
@@ -35,4 +38,78 @@ button {
 button:hover {
    transform: scale(1.05);
    transition: all 0.3s ease;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 1400px; 
+    margin: 0 auto; 
+}
+
+.topContainer {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.cardContainer {
+    flex: 1;
+    min-width: 300px; 
+    margin: 10px; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.topContainer {
+    display: flex;
+}
+
+.cardContainer {
+    flex: 1;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.titleContainer {
+    text-align: center;
+    position: sticky;
+    top: 0;
+    background-color: var(--title-banner-color);
+}
+
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    width: 100%;
+    gap: 10px;
+}
+
+.formInput {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
+}
+
+.bottomContainer {
+    display: block;
+    width: 100%;
+    flex-wrap: wrap;
 }
