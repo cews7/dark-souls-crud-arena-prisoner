@@ -16,7 +16,7 @@
             <h3>Create thy champion and face the darkness</h3>
         </div>
 
-        <div class="mainContainer">
+        <div class="topContainer">
             <div class="cardContainer">
                 <h2>Create New Hero</h2>
                 <form class="formContainer" id="createHeroForm">
@@ -103,11 +103,18 @@
                 </div>
             </div>
         </div>
+        <div class="bottomContainer">
+            <div class="equipmentListContainer">
+                <h2>Equipment List</h2>
+                <ul id="equipmentList">
+                </ul>
+            </div>
+        </div>
     </body>
 </html>
 
 <style>
-    .mainContainer {
+    .topContainer {
         display: flex;
         gap: 20px;
     }
@@ -143,5 +150,18 @@
         font-family: 'Arial', sans-serif;
         color: #333;
     }
+
+    .bottomContainer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .equipmentListContainer {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 20px;
+    }
+    
 
 </style>

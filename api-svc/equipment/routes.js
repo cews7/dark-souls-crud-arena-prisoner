@@ -40,7 +40,7 @@ const createEquipment = async (body, res) => {
 
     try {
         const result = await pool.query(
-            'INSERT INTO equipment (name, type, minLevel) VALUES ($1, $2, $3) RETURNING *', 
+            'INSERT INTO equipment (name, type, "minLevel") VALUES ($1, $2, $3) RETURNING *', 
             [body.name, body.type, body.minLevel]
         );
         

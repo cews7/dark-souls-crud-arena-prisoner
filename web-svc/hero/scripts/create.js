@@ -8,7 +8,7 @@ export const handleCreateHeroButton = () => {
         const heroLevel = document.getElementById('heroLevel').value;
         const heroClass = document.getElementById('heroClass').value;
         if (!heroName || !heroLevel || !heroClass) {
-            alert('Please fill in all fields');
+            alert('Please fill in all required fields for hero creation');
             return;
         }
         const hero = {

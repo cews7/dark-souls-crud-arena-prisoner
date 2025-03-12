@@ -8,7 +8,7 @@ export const handleCreateEquipmentButton = () => {
         const equipmentType = document.getElementById('equipmentType').value;
         const equipmentMinLevel = document.getElementById('equipmentMinLevel').value;
         if (!equipmentName || !equipmentType || !equipmentMinLevel) {
-            alert('Please fill in all fields');
+            alert('Please fill in all required fields for equipment creation');
             return;
         }
         const equipment = {
