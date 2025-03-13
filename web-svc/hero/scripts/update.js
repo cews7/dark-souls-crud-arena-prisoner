@@ -7,12 +7,12 @@ const getHero = async () => {
     return data;
 }
 
-export const handleUpdateHeroButton = () => {
-    const updateHeroForm = document.getElementById('updateHeroForm');
-    const updateHeroSubmit = document.getElementById('updateHeroSubmit');
-    if (!updateHeroForm || !updateHeroSubmit) return;
+export const handleUpdateHeroDetailsSubmit = () => {
+    const updateHeroDetailsForm = document.getElementById('updateHeroDetailsForm');
+    const updateHeroDetailsSubmit = document.getElementById('updateHeroDetailsSubmit');
+    if (!updateHeroDetailsForm || !updateHeroDetailsSubmit) return;
 
-    updateHeroSubmit.addEventListener('click', async (e) => {
+    updateHeroDetailsSubmit.addEventListener('click', async (e) => {
         e.preventDefault();
         const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
         const heroName = document.getElementById('heroName').value;
@@ -45,7 +45,7 @@ export const handleUpdateHeroButton = () => {
             const heroNameTitle = document.getElementById('heroNameTitle');
             const heroFlavor = document.getElementById('heroFlavorText');
             localStorage.setItem('selectedHero', JSON.stringify(data));
-            document.getElementById('updateHeroForm').style.display = 'none';
+            document.getElementById('updateHeroDetailsForm').style.display = 'none';
             const classInfo = heroClassMap[data.class] || {
                 cssClass: 'unknown-class',
                 flavorText: 'a mysterious figure',
@@ -64,5 +64,5 @@ export const handleUpdateHeroButton = () => {
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
-    handleUpdateHeroButton();
+    handleUpdateHeroDetailsSubmit();
 });

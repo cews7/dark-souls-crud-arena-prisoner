@@ -56,15 +56,6 @@ button:hover {
     flex-wrap: wrap;
 }
 
-.cardContainer {
-    flex: 1;
-    min-width: 300px; 
-    margin: 10px; 
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
 .mainContainer {
     display: flex;
     flex-direction: column;
@@ -78,7 +69,7 @@ button:hover {
     flex: 1;
     margin: 20px;
     padding: 20px;
-    border: 1px solid #ccc;
+    border: 5px solid #ccc;
     border-radius: 5px;
 }
 

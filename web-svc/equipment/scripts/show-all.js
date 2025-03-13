@@ -12,11 +12,6 @@ const getAllEquipment = async () => {
             <p>Status: ${equipment.hero_id ? 'Equipped' : 'Available'}</p>
             `
             ;
-
-            equipmentItem.addEventListener('click', () => {
-                localStorage.setItem('selectedEquipment', JSON.stringify(equipment));
-                window.location.href = `/equipment/${equipment.id}`;
-            });
             equipmentList.appendChild(equipmentItem);
         });
     } catch (error) {

@@ -1,11 +1,13 @@
 import { handleCreateHeroButton } from './create.js';
-import { handleUpdateHeroButton } from './update.js';
+import { handleUpdateHeroDetailsButton, handleCancelUpdateHeroDetailsButton, handleBrowseEquipmentButton } from './show.js';
 import { getHeroes } from './show-all.js';
 import { showHero } from './show.js';
 
 const initHero = () => {
     handleCreateHeroButton();
-    handleUpdateHeroButton();
+    handleUpdateHeroDetailsButton();
+    handleCancelUpdateHeroDetailsButton();
+    handleBrowseEquipmentButton();
     getHeroes();
     showHero();
 }
