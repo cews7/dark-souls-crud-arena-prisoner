@@ -1,3 +1,16 @@
+const deleteEquipment = async (id) => {
+    const response = await fetch(`http://localhost:3000/api/equipment/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id })
+    });
+    if (response.ok) {
+        getAllEquipment();
+    }
+}
+
 const getAllEquipment = async () => {
     try {
         const response = await fetch('http://localhost:3000/api/equipment');
@@ -10,9 +23,20 @@ const getAllEquipment = async () => {
             equipmentItem.classList.add('equipmentItem');
             equipmentItem.innerHTML = `<h4>${equipment.name}</h4> <p>Type: ${equipment.type}</p> <p>Min Level: ${equipment.minLevel}</p>
             <p>Status: ${equipment.hero_id ? 'Equipped' : 'Available'}</p>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+            ${!equipment.hero_id ? `<button id="deleteEquipmentButton-${equipment.id}" class="delete-btn">
+            <i class="fas fa-fire"></i> Delete
+            </button>` : ''}
             `
             ;
             equipmentList.appendChild(equipmentItem);
+
+            const deleteEquipmentButton = document.getElementById(`deleteEquipmentButton-${equipment.id}`);
+            if (deleteEquipmentButton) {
+                deleteEquipmentButton.addEventListener('click', async () => {
+                   await deleteEquipment(equipment.id);
+                });
+            }
         });
     } catch (error) {
         console.error('Error:', error);

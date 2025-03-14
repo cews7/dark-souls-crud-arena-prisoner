@@ -35,7 +35,7 @@ const handleApiRequest = (req, res) => {
     // Handle different API endpoints
     if (apiPath.startsWith('/heroes')) {
         handleHeroesRequest(req, res);
-    } else if (apiPath === '/equipment') {
+    } else if (apiPath.startsWith('/equipment')) {
         handleEquipmentRequest(req, res);
     } else {
         res.statusCode = 404;

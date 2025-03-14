@@ -7,6 +7,9 @@ export const handleEquipmentRequest = async (req, res) => {
     } else if (req.method === 'POST') {
         const body = await parseJsonBody(req);
         createEquipment(body, res);
+    } else if (req.method === 'DELETE') {
+        const body = await parseJsonBody(req);
+        deleteEquipment(body, res);
     }
 }
 
@@ -56,5 +59,18 @@ const createEquipment = async (body, res) => {
         res.statusCode = 500;
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ error: 'Error creating equipment' }));
+    }
+}
+
+const deleteEquipment = async (body, res) => {
+    const { id } = body;
+    try {
+        const result = await pool.query('DELETE FROM equipment WHERE id = $1', [id]);
+        res.end(JSON.stringify(result.rows));
+    } catch (err) {
+        console.error('Database error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Error deleting equipment' }));
     }
 }

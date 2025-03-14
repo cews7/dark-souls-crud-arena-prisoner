@@ -17,11 +17,11 @@ export const showHero = () => {
     const heroNameTitle = document.getElementById('heroNameTitle');
     const heroFlavor = document.getElementById('heroFlavorText');
     if (!heroDetails || !heroNameTitle) return;
-
     const classInfo = heroClassMap[hero.class] || {
         cssClass: 'unknown-class',
         flavorText: 'a mysterious figure',
     };
+    const flavorText = document.getElementById('heroFlavorText');
 
     heroNameTitle.innerHTML = hero.name;
     heroDetails.innerHTML = `
@@ -33,7 +33,6 @@ export const showHero = () => {
     heroFlavor.innerHTML = `<p>${classInfo.flavorText}</p>`;
 
 
-    const flavorText = document.getElementById('heroFlavorText');
 
     if (flavorText) {
         flavorText.innerHTML = `<p>${classInfo.flavorText}</p>`;
@@ -59,11 +58,51 @@ export const handleBrowseEquipmentButton = () => {
         const equipmentModal = document.getElementById('equipmentModal');
         equipmentModal.style.display = 'block';
 
-        
-        const equipment = await getAllEquipment();
-         console.log(equipment);
+        const hero = JSON.parse(localStorage.getItem('selectedHero'));
+        const allEquipment = await getAllEquipment();
+        const availableEquipmentList = allEquipment.filter(equipment => 
+            (equipment.hero_id === null || equipment.hero_id === hero.id)
+            && equipment.minLevel <= hero.level);
+    
+        if (availableEquipmentList.length === 0) {
+            const noEquipmentMessage = document.getElementById('noEquipmentMessage');
+            noEquipmentMessage.textContent = 'No equipment available for this hero.';
+            return;
+        }
+
+        availableEquipmentList.forEach(equipment => {
+            const availableEquipmentListContainer = document.getElementById('availableEquipmentListContainer');
+            const equipmentItem = availableEquipmentListContainer.appendChild(document.createElement('input'));
+            const equipmentLabel = availableEquipmentListContainer.appendChild(document.createElement('label'));
+
+            equipmentItem.type = 'checkbox';
+            equipmentItem.id = equipment.id;
+            if (equipment.hero_id === hero.id) {
+                equipmentItem.checked = true;
+            }
+            equipmentItem.name = equipment.name;
+            equipmentItem.value = equipment.id;
+            equipmentItem.textContent = equipment.name;
+
+            equipmentLabel.textContent = equipment.name;
+        });
     });
 }
+
+export const handleEquipmentSelectionCancelButton = () => {
+    const equipmentSelectionCancelButton = document.getElementById('equipmentSelectionCancelButton');
+    if (!equipmentSelectionCancelButton) return;
+
+    equipmentSelectionCancelButton.addEventListener('click', () => {
+        const availableEquipmentListContainer = document.getElementById('availableEquipmentListContainer');
+        const equipmentModal = document.getElementById('equipmentModal');
+        
+        availableEquipmentListContainer.textContent = '';
+        noEquipmentMessage.textContent = '';
+        equipmentModal.style.display = 'none';
+    });
+}
+
 
 export const handleUpdateHeroDetailsButton = () => {
     const updateHeroDetailsButton = document.getElementById('updateHeroDetailsButton');
@@ -99,5 +138,6 @@ document.addEventListener('DOMContentLoaded', () => {
     handleUpdateHeroDetailsButton();
     handleCancelUpdateHeroDetailsButton();
     handleBrowseEquipmentButton();
+    handleEquipmentSelectionCancelButton();
 });
 

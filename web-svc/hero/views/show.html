@@ -34,9 +34,13 @@
     <div id="equipmentModal" class="equipmentModal">
         <div class="modal">
             <div class="modal-content">
-                <h2>Equipment</h2>
-                <div id="equipmentList"></div>
+                <h2>Available Equipment</h2>
+                <p id="noEquipmentMessage"></p>
+                <div id="availableEquipmentListContainer"></div>
+                <button id="equipmentSubmitButton">Equip All Selected</button>
+                <button id="equipmentSelectionCancelButton">Cancel</button>
             </div>
+            <div class="modal-overlay"></div>
         </div>
     </div>
     <div id="updateHeroDetailsForm">
@@ -105,24 +109,6 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-}
-
-.modal::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    right: -10px;
-    bottom: -10px;
-    background: white;
-    z-index: -1;
-    clip-path: polygon(
-        0% 5%, 5% 0%, 15% 3%, 25% 0%, 35% 4%, 45% 0%, 55% 3%, 65% 0%, 75% 4%, 85% 0%, 95% 3%, 100% 0%,
-        100% 5%, 97% 15%, 100% 25%, 96% 35%, 100% 45%, 97% 55%, 100% 65%, 96% 75%, 100% 85%, 97% 95%, 100% 100%,
-        95% 100%, 85% 97%, 75% 100%, 65% 96%, 55% 100%, 45% 97%, 35% 100%, 25% 96%, 15% 100%, 5% 97%, 0% 100%,
-        0% 95%, 3% 85%, 0% 75%, 4% 65%, 0% 55%, 3% 45%, 0% 35%, 4% 25%, 0% 15%, 3% 5%
-    );
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
 .modal-overlay {
