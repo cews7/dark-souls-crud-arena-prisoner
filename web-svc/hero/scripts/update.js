@@ -39,12 +39,16 @@ export const handleUpdateHeroDetailsSubmit = () => {
                     'Content-Type': 'application/json'
                 }
             });
+            
             await response.json();
+
             const data = await getHero();
             const heroDetails = document.getElementById('heroDetails');
             const heroNameTitle = document.getElementById('heroNameTitle');
             const heroFlavor = document.getElementById('heroFlavorText');
+
             localStorage.setItem('selectedHero', JSON.stringify(data));
+
             document.getElementById('updateHeroDetailsForm').style.display = 'none';
             const classInfo = heroClassMap[data.class] || {
                 cssClass: 'unknown-class',
