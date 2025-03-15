@@ -2,14 +2,13 @@ import pool from '../database.js';
 import { validateEquipmentBody, parseJsonBody } from '../utils.js';
 
 export const handleEquipmentRequest = async (req, res) => {
+    const body = await parseJsonBody(req);
     if (req.method === 'GET') {
         getAllEquipment(req, res);
     } else if (req.method === 'POST') {
-        const body = await parseJsonBody(req);
         createEquipment(body, res);
     } else if (req.method === 'DELETE') {
-        const body = await parseJsonBody(req);
-        deleteEquipment(body, res);
+        await deleteEquipment(body, res);
     }
 }
 

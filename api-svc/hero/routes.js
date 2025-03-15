@@ -11,7 +11,11 @@ export const handleHeroesRequest = async (req, res) => {
     } else if (req.method === 'POST') {
         try {
             const body = await parseJsonBody(req);
-            await createHero(body, res);
+            if (req.url.match(/api\/heroes$/)) {
+                await createHero(body, res);
+            } else if (req.url.match(/api\/heroes\/(\d+)\/equipment$/)) {
+                await addEquipmentToHero(body, res);
+            }
         } catch (err) {
             console.error('Error parsing JSON body:', err);
             res.statusCode = 400;
@@ -27,6 +31,20 @@ export const handleHeroesRequest = async (req, res) => {
             res.statusCode = 400;
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ error: 'Invalid JSON body' }));
+        }
+    } else if (req.method === 'DELETE') {
+        try {
+            const body = await parseJsonBody(req);
+            if (req.url.match(/api\/heroes\/(\d+)$/)) {
+                await deleteHero(body, res);
+            } else if (req.url.match(/api\/heroes\/(\d+)\/equipment$/)) {
+                await deleteEquipmentFromHero(body, res);
+            }
+        } catch (err) {
+            console.error('Error deleting hero:', err);
+            res.statusCode = 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ error: 'Error deleting hero' }));
         }
     }
 }
@@ -126,4 +144,49 @@ const updateHero = async (body, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.end(JSON.stringify({ error: 'Error updating hero' }));
     }
+}
+
+const addEquipmentToHero = async (body, res) => {
+    if (body.heroId === null || body.equipmentIds === null) {
+        res.statusCode = 400;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Missing required fields' }));
+        return;
+    }
+
+    try {
+        const heroId = body.heroId;
+        const equipmentIds = body.equipmentIds;
+        
+        equipmentIds.forEach(async (equipmentId) => {
+            await pool.query('UPDATE equipment SET hero_id = $1 WHERE id = $2', [heroId, equipmentId]);
+        });
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ message: 'Equipment added to hero' }));
+    } catch (err) {
+        console.error('Database error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Error adding equipment to hero' }));
+    }
+}
+
+const deleteEquipmentFromHero = async (body, res) => {
+    if (body.heroId === null || body.equipmentIds === null) {
+        res.statusCode = 400;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Missing required fields' }));
+        return;
+    }
+
+    const heroId = body.heroId;
+    const equipmentIds = body.equipmentIds;
+
+    equipmentIds.forEach(async (equipmentId) => {
+        await pool.query('UPDATE equipment SET hero_id = NULL WHERE id = $1 AND hero_id = $2', [equipmentId, heroId]);
+    });
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ message: 'Equipment removed from hero' }));
 }

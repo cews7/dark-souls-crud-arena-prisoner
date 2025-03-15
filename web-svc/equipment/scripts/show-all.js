@@ -1,15 +1,5 @@
-const deleteEquipment = async (id) => {
-    const response = await fetch(`http://localhost:3000/api/equipment/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id })
-    });
-    if (response.ok) {
-        getAllEquipment();
-    }
-}
+import { handleDeleteEquipmentButton } from './delete.js';
+
 
 const getAllEquipment = async () => {
     try {
@@ -27,14 +17,14 @@ const getAllEquipment = async () => {
             ${!equipment.hero_id ? `<button id="deleteEquipmentButton-${equipment.id}" class="delete-btn">
             <i class="fas fa-fire"></i> Delete
             </button>` : ''}
-            `
-            ;
+            `;
             equipmentList.appendChild(equipmentItem);
-
+            
             const deleteEquipmentButton = document.getElementById(`deleteEquipmentButton-${equipment.id}`);
+
             if (deleteEquipmentButton) {
-                deleteEquipmentButton.addEventListener('click', async () => {
-                   await deleteEquipment(equipment.id);
+                deleteEquipmentButton.addEventListener('click', () => {
+                    handleDeleteEquipmentButton(equipment.id);
                 });
             }
         });
