@@ -5,6 +5,8 @@ export const handleHeroesRequest = async (req, res) => {
     if (req.method === 'GET') {
         if (req.url.match(/api\/heroes\/\d+$/)) {
             getHero(req, res);
+        } else if (req.url.match(/api\/heroes\/\d+\/equipment$/)) {
+            getEquipmentForHero(req, res);
         } else {
             getHeroes(req, res);
         }
@@ -189,4 +191,19 @@ const deleteEquipmentFromHero = async (body, res) => {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify({ message: 'Equipment removed from hero' }));
+}
+
+const getEquipmentForHero = async (req, res) => {
+    const heroId = req.url.match(/api\/heroes\/(\d+)\/equipment$/)[1];
+    console.log('heroId', heroId);
+    try {
+        const result = await pool.query('SELECT * FROM equipment WHERE hero_id = $1', [heroId]);
+        res.end(JSON.stringify(result.rows));
+        console.log('result', JSON.stringify(result.rows));
+    } catch (err) {
+        console.error('Database error:', err);
+        res.statusCode = 500;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Error getting equipment for hero' }));
+    }
 }

@@ -6,10 +6,9 @@
     <title>Hero Details</title>
     <script type="module" src="/hero/scripts/show.js"></script>
     <script type="module" src="/hero/scripts/update.js"></script>
-    <script type="module" src="/hero/equipment/scripts/create.js"></script>
-    <script type="module" src="/hero/equipment/scripts/delete.js"></script>
-    <link rel="stylesheet" href="/hero/hero.css">
-    <link rel="stylesheet" href="/hero/hero-classes.css">
+    <script type="module" src="/hero/equipment/scripts/submit.js"></script>
+    <link rel="stylesheet" href="/hero/styles/hero.css">
+    <link rel="stylesheet" href="/hero/styles/hero-classes.css">
     <link rel="stylesheet" href="/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +26,8 @@
             <div id="heroFlavorText"></div>
             <div id="heroEquipmentContainer">
                 <h2>Equipment</h2>
-                <div id="heroEquipmentList"></div>
+                <p id="heroHasNoEquipmentMessage"></p>
+                <ul id="heroEquipmentList"></ul>
             </div>
             <button id="browseEquipmentButton">Browse Equipment</button>
         </div>
@@ -71,7 +71,7 @@
                         </select>
                     </label>
                     <div class="modal-buttons">
-                        <button id="updateHeroDetailsSubmit" type="submit">Update</button>
+                        <button id="updateHeroDetailsSubmit" type="submit">Update Hero</button>
                         <button id="cancelUpdateHeroDetailsButton" type="button">Cancel</button>
                     </div>
                 </form>

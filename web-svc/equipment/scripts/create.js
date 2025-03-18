@@ -1,4 +1,4 @@
-import { getAllEquipment } from './show-all.js';
+import { getAllEquipment } from './index.js';
 
 export const handleCreateEquipmentButton = () => {
     const submitButton = document.getElementById('createEquipmentSubmit');

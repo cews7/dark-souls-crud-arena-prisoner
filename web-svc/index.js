@@ -1,5 +1,5 @@
-import { initHero } from './hero/scripts/index.js';
-import { initEquipment } from './equipment/scripts/index.js';
+import { initHero } from './hero/main.js';
+import { initEquipment } from './equipment/main.js';
 
 initHero();
 initEquipment();

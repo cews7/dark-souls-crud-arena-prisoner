@@ -1,4 +1,4 @@
-import { getHeroes } from './show-all.js';
+import { getHeroes } from './index.js';
 
 export const handleCreateHeroButton = () => {
     const submitButton = document.getElementById('createHeroSubmit');

@@ -1,4 +1,4 @@
-import { getAllEquipment } from './show-all.js';
+import { getAllEquipment } from './index.js';
 
 const deleteEquipment = async (id) => {
     const response = await fetch(`http://localhost:3000/api/equipment/${id}`, {

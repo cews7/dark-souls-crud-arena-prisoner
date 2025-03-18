@@ -1,20 +1,24 @@
-import { handleCreateHeroButton } from './create.js';
-import { handleUpdateHeroDetailsButton, handleCancelUpdateHeroDetailsButton, handleBrowseEquipmentButton, handleEquipmentSelectionCancelButton } from './show.js';
-import { handleEquipmentSelectionSubmitButton } from '../equipment/scripts/create.js';
-import { handleEquipmentDeleteButton } from '../equipment/scripts/delete.js';
-import { getHeroes } from './show-all.js';
-import { showHero } from './show.js';
+const getHeroes = async () => {
+    try {
+        const response = await fetch('http://localhost:3000/api/heroes');
+        const data = await response.json();
+        localStorage.setItem('heroes', JSON.stringify(data));
+        const heroList = document.getElementById('heroList');
+        heroList.innerHTML = '';
+        data.forEach(hero => {
+            const heroItem = document.createElement('div');
+            heroItem.classList.add('heroItem');
+            heroItem.innerHTML = `<h4>${hero.name}</h4> <p>Level: ${hero.level}</p> <p>${hero.class}</p>`;
 
-const initHero = () => {
-    handleCreateHeroButton();
-    handleUpdateHeroDetailsButton();
-    handleCancelUpdateHeroDetailsButton();
-    handleBrowseEquipmentButton();
-    handleEquipmentSelectionCancelButton();
-    handleEquipmentSelectionSubmitButton();
-    handleEquipmentDeleteButton();
-    getHeroes();
-    showHero();
+            heroItem.addEventListener('click', () => {
+                localStorage.setItem('selectedHero', JSON.stringify(hero));
+                window.location.href = `/heroes/${hero.id}`;
+            });
+            heroList.appendChild(heroItem);
+        });
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
-export { initHero };
+export { getHeroes };

@@ -11,33 +11,50 @@ const getAllEquipment = async () => {
     return data;
 }
 
-export const showHero = () => {
-    const hero = JSON.parse(localStorage.getItem('selectedHero'));
+export const showHero = async () => {
+    const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
     const heroDetails = document.getElementById('heroDetails');
     const heroNameTitle = document.getElementById('heroNameTitle');
     const heroFlavor = document.getElementById('heroFlavorText');
+
     if (!heroDetails || !heroNameTitle) return;
-    const classInfo = heroClassMap[hero.class] || {
+    const classInfo = heroClassMap[selectedHero.class] || {
         cssClass: 'unknown-class',
         flavorText: 'a mysterious figure',
     };
     const flavorText = document.getElementById('heroFlavorText');
-
-    heroNameTitle.innerHTML = hero.name;
+    const heroEquipment = JSON.parse(localStorage.getItem(`heroEquipment-${selectedHero.id}`));
+    const heroEquipmentList = document.getElementById('heroEquipmentList');
+    const heroHasNoEquipmentMessage = document.getElementById('heroHasNoEquipmentMessage');
+    heroNameTitle.innerHTML = selectedHero.name;
     heroDetails.innerHTML = `
-        <p class="heroLevel">Level: ${hero.level}</p>
+        <p class="heroLevel">Level: ${selectedHero.level}</p>
         <div class="heroClassContainer">
-            <span class="${classInfo.cssClass}">${hero.class.toUpperCase()}</span>
+            <span class="${classInfo.cssClass}">${selectedHero.class.toUpperCase()}</span>
         </div>
     `;
     heroFlavor.innerHTML = `<p>${classInfo.flavorText}</p>`;
-
-
 
     if (flavorText) {
         flavorText.innerHTML = `<p>${classInfo.flavorText}</p>`;
     }
 
+    heroEquipmentList.innerHTML = '';
+    heroHasNoEquipmentMessage.innerHTML = '';
+
+    if (heroEquipment !== null) {
+        if (heroEquipment.length > 0) {
+            heroEquipmentList.innerHTML = heroEquipment
+                .filter(equipment => equipment.hero_id === selectedHero.id)
+                .map(equipment => `<li>${equipment.name}</li>`)
+                .join('');
+        }
+    }
+
+    if (heroEquipment === null || heroEquipment.length === 0) {
+        heroHasNoEquipmentMessage.innerHTML = `<p>${selectedHero.name} has no equipment</p>`;
+    }
+        
     const equipmentModal = document.getElementById('equipmentModal');
     if (equipmentModal) {
         equipmentModal.style.display = 'none';
@@ -58,14 +75,17 @@ export const handleBrowseEquipmentButton = () => {
         const equipmentModal = document.getElementById('equipmentModal');
         equipmentModal.style.display = 'block';
 
-        const hero = JSON.parse(localStorage.getItem('selectedHero'));
+        const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
         const allEquipment = await getAllEquipment();
         const availableEquipmentList = allEquipment.filter(equipment => 
-            (equipment.hero_id === null || equipment.hero_id === hero.id)
-            && equipment.minLevel <= hero.level);
+            (equipment.hero_id === null || equipment.hero_id === selectedHero.id)
+            && equipment.minLevel <= selectedHero.level);
     
         if (availableEquipmentList.length === 0) {
             const noEquipmentMessage = document.getElementById('noEquipmentMessage');
+            const equipSelctionSubmitButton = document.getElementById('equipmentSelectionSubmitButton');
+            equipSelctionSubmitButton.disabled = true;
+            equipSelctionSubmitButton.style.backgroundColor = 'gray';
             noEquipmentMessage.textContent = 'No equipment available for this hero.';
             return;
         }
@@ -77,7 +97,7 @@ export const handleBrowseEquipmentButton = () => {
 
             equipmentItem.type = 'checkbox';
             equipmentItem.id = equipment.id;
-            if (equipment.hero_id === hero.id) {
+            if (equipment.hero_id === selectedHero.id) {
                 equipmentItem.checked = true;
             }
             equipmentItem.name = equipment.name;
@@ -102,7 +122,6 @@ export const handleEquipmentSelectionCancelButton = () => {
         equipmentModal.style.display = 'none';
     });
 }
-
 
 export const handleUpdateHeroDetailsButton = () => {
     const updateHeroDetailsButton = document.getElementById('updateHeroDetailsButton');
