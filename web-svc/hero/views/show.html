@@ -6,6 +6,7 @@
     <title>Hero Details</title>
     <script type="module" src="/hero/scripts/show.js"></script>
     <script type="module" src="/hero/scripts/update.js"></script>
+    <script type="module" src="/hero/scripts/delete.js"></script>
     <script type="module" src="/hero/equipment/scripts/submit.js"></script>
     <link rel="stylesheet" href="/hero/styles/hero.css">
     <link rel="stylesheet" href="/hero/styles/hero-classes.css">
@@ -31,7 +32,10 @@
             </div>
             <button id="browseEquipmentButton">Browse Equipment</button>
         </div>
-        <button id="updateHeroDetailsButton">Update Hero</button>
+        <div id="heroActionsContainer">
+            <button id="updateHeroDetailsButton">Update Hero</button>
+            <button id="deleteHeroButton" class="deleteHeroButton">Delete Hero</button>
+        </div>
     </div>
     <div id="equipmentModal" class="equipmentModal">
         <div class="modal">

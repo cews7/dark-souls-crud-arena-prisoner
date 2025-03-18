@@ -55,6 +55,7 @@ export const handleEquipmentSelectionSubmitButton = () => {
         if (heroEquipmentList) {
             heroEquipmentList.innerHTML = '';
         }
+
         // we don't have to check for null because we are setting heroEquipment-:id in localStorage and will always have an empty array if no equipment is selected
         if (heroEquipment.length > 0) {
             heroEquipmentList.innerHTML = heroEquipment
@@ -66,6 +67,18 @@ export const handleEquipmentSelectionSubmitButton = () => {
 
         if (heroEquipment.length === 0) {
             heroHasNoEquipmentMessage.innerHTML = `<p>${selectedHero.name} has no equipment</p>`;
+        }
+
+        if (heroEquipmentList.innerHTML !== '') {
+            deleteHeroButton.disabled = true;
+            deleteHeroButton.title = 'Must remove all equipment before deleting hero';
+            deleteHeroButton.style.backgroundColor = 'gray';
+        }
+    
+        if (heroEquipmentList.innerHTML === '') {
+            deleteHeroButton.disabled = false;
+            deleteHeroButton.title = '';
+            deleteHeroButton.style.backgroundColor = '';
         }
 
         availableEquipmentList.textContent = '';

@@ -54,6 +54,19 @@ export const showHero = async () => {
     if (heroEquipment === null || heroEquipment.length === 0) {
         heroHasNoEquipmentMessage.innerHTML = `<p>${selectedHero.name} has no equipment</p>`;
     }
+
+    if (heroEquipmentList.innerHTML !== '') {
+        deleteHeroButton.disabled = true;
+        deleteHeroButton.title = 'Must remove all equipment before deleting hero';
+        deleteHeroButton.style.backgroundColor = 'gray';
+    }
+
+    if (heroEquipmentList.innerHTML === '') {
+        deleteHeroButton.disabled = false;
+        deleteHeroButton.title = '';
+        deleteHeroButton.style.backgroundColor = '';
+    }
+
         
     const equipmentModal = document.getElementById('equipmentModal');
     if (equipmentModal) {

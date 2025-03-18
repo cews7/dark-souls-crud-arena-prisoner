@@ -148,6 +148,21 @@ const updateHero = async (body, res) => {
     }
 }
 
+const deleteHero = async (body, res) => {
+    if (!body.id) {
+        res.statusCode = 400;
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: 'Missing required fields' }));
+        return;
+    }
+
+    const id = body.id;
+    await pool.query('DELETE FROM heroes WHERE id = $1', [id]);
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({ message: 'Hero deleted' }));
+}
+
 const addEquipmentToHero = async (body, res) => {
     if (body.heroId === null || body.equipmentIds === null) {
         res.statusCode = 400;
@@ -199,7 +214,6 @@ const getEquipmentForHero = async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM equipment WHERE hero_id = $1', [heroId]);
         res.end(JSON.stringify(result.rows));
-        console.log('result', JSON.stringify(result.rows));
     } catch (err) {
         console.error('Database error:', err);
         res.statusCode = 500;
