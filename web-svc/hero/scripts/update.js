@@ -13,7 +13,6 @@ export const handleUpdateHeroDetailsSubmit = () => {
     if (!updateHeroDetailsForm || !updateHeroDetailsSubmit) return;
 
     updateHeroDetailsSubmit.addEventListener('click', async (e) => {
-        console.log('updateHeroDetailsSubmit clicked');
         e.preventDefault();
         const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
         const heroName = document.getElementById('heroName').value;
