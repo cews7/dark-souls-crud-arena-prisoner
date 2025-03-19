@@ -17,7 +17,7 @@ export const handleCreateHeroButton = () => {
             class: heroClass
         } 
         try {
-            const response = await fetch('http://localhost:3000/api/heroes', {
+            const response = await fetch('/api/heroes', {
                 method: 'POST',
                 body: JSON.stringify(hero),
                 headers: {

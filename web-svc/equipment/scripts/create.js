@@ -17,7 +17,7 @@ export const handleCreateEquipmentButton = () => {
             minLevel: parseInt(equipmentMinLevel)
         }
         try {
-            const response = await fetch('http://localhost:3000/api/equipment', {
+            const response = await fetch('/api/equipment', {
                 method: 'POST',
                 body: JSON.stringify(equipment),
                 headers: {

@@ -2,7 +2,7 @@ import { heroClassMap } from '../utils.js';
 
 const getHero = async () => {
     const selectedHero = JSON.parse(localStorage.getItem('selectedHero'));
-    const response = await fetch(`http://localhost:3000/api/heroes/${selectedHero.id}`);
+    const response = await fetch(`/api/heroes/${selectedHero.id}`);
     const data = await response.json();
     return data;
 }
@@ -32,7 +32,7 @@ export const handleUpdateHeroDetailsSubmit = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:3000/api/heroes/${selectedHero.id}`, {
+            const response = await fetch(`/api/heroes/${selectedHero.id}`, {
                 method: 'PUT',
                 body: JSON.stringify(updatedHero),
                 headers: {

@@ -1,7 +1,7 @@
 import { getAllEquipment } from './index.js';
 
 const deleteEquipment = async (id) => {
-    const response = await fetch(`http://localhost:3000/api/equipment/${id}`, {
+    const response = await fetch(`/api/equipment/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'

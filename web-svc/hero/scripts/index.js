@@ -1,6 +1,6 @@
 const getHeroes = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/heroes');
+        const response = await fetch('/api/heroes');
         const data = await response.json();
         localStorage.setItem('heroes', JSON.stringify(data));
         const heroList = document.getElementById('heroList');
