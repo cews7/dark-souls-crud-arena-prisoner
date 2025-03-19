@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
-dotenv.config();
-
+import { config } from './config.js';
 
 import { createServer } from 'node:http';
 import fs from 'node:fs/promises';
@@ -9,8 +7,8 @@ import { fileURLToPath } from 'node:url';
 import { handleHeroesRequest } from './hero/routes.js';
 import { handleEquipmentRequest } from './equipment/routes.js';
 
-const hostname = process.env.SERVER_HOST;
-const port = process.env.SERVER_PORT;
+const hostname = config.database.host;
+const port = config.server.port;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

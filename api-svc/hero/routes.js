@@ -210,7 +210,7 @@ const deleteEquipmentFromHero = async (body, res) => {
 
 const getEquipmentForHero = async (req, res) => {
     const heroId = req.url.match(/api\/heroes\/(\d+)\/equipment$/)[1];
-    console.log('heroId', heroId);
+    
     try {
         const result = await pool.query('SELECT * FROM equipment WHERE hero_id = $1', [heroId]);
         res.end(JSON.stringify(result.rows));
