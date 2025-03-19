@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { handleHeroesRequest } from './hero/routes.js';
 import { handleEquipmentRequest } from './equipment/routes.js';
 
-const hostname = config.database.host;
+const hostname = config.server.host;
 const port = config.server.port;
 
 const __filename = fileURLToPath(import.meta.url);
