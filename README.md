@@ -10,18 +10,14 @@ Equipment can be equipped by a hero and removed from a hero.
 ### Approach: Prisoner 
 - FE: Vanilla JavaScript, HTML, CSS 
 - BE: Node.js, SQL, Postgres
-- Deployment: 
-	 - BE: Digital Ocean (running server, configuration required) 
-	 - FE: GitHub Pages
+- Deployment: AWS monolith using EC2 (server) and RDS (database)
 
 **PRISONER VICTORY CONDITIONS**
 - Build complete UI with no framework assistance
 - Implement client-side form validation without libraries
 - Write raw SQL queries with proper error handling
 - Set up Node server from scratch with proper middleware
-- Configure and deploy BE to Digital Ocean with:
+- Configure and deploy to AWS with:
     - Nginx  (server)
-    - SSL configuration
     - Process management (PM2)
     - Basic security hardening
-- Deploy FE to GitHub Pages
